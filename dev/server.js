@@ -89,17 +89,13 @@ class ServerExample {
         let image = files[this.fieldName] || {};
 
         responseJson.success = 1;
-        responseJson.file = {
-          url: image.path,
-          name: image.name,
-          size: image.size
-        };
+        responseJson.file = image;
       })
       .catch((error) => {
         console.log('Uploading error', error);
       })
       .finally(() => {
-        response.writeHead(200, {'Content-Type': 'application/json'});
+        response.writeHead(200, {'Content-Type': 'image/*'});
         response.end(JSON.stringify(responseJson));
       });
   }
